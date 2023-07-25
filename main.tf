@@ -91,7 +91,7 @@ module "vnet" {
   default_tags                    = module.base_tagging.base_tags
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
-  virtual_network_address_space = local.virtual_network_address_space
+  virtual_network_address_space           = local.virtual_network_address_space
   virtual_network_flow_timeout_in_minutes = 4
 
 
@@ -103,7 +103,7 @@ module "route_table" {
   location            = module.regions.location
   location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
-  default_tags      = module.base_tagging.base_tags
+  default_tags        = module.base_tagging.base_tags
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
 
@@ -140,6 +140,16 @@ module "subnet-private-endpoint" {
   //network_security_group_id               = 
 }
 
+module "nsg" {
+  source              = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-nsg//module?ref=main"
+  landing_zone_slug   = local.landing_zone_slug
+  stack               = local.stack
+  location            = module.regions.location
+  location_short      = module.regions.location_short
+  resource_group_name = module.resource_group.resource_group_name
+  default_tags        = module.base_tagging.base_tags
+  security_rules      = []
+}
 
 ### Supporting Services
 
@@ -226,9 +236,9 @@ module "vmwindows" {
 
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
-  hostname            = local.vm_hostname
+  hostname  = local.vm_hostname
   subnet_id = module.subnet.subnet_id
 
-  //network_security_group_id        = ""
+  network_security_group_id = module.nsg.nsg_id
 
 }
