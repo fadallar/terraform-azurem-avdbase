@@ -56,6 +56,7 @@ module "resource_group" {
   default_tags      = module.base_tagging.base_tags
   location          = module.regions.location
   location_short    = module.regions.location_short
+  environment       = local.environment
 }
 
 module "diag_log_analytics_workspace" {
@@ -100,7 +101,7 @@ module "route_table" {
 }
 
 module "subnet" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=master"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
@@ -114,7 +115,7 @@ module "subnet" {
 }
 
 module "subnet-private-endpoint" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=master"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
