@@ -117,6 +117,7 @@ module "subnet" {
   location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
 
+  enable_delegation = false
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet
   route_table_id       = module.route_table.route_table_id
@@ -131,6 +132,7 @@ module "subnet-private-endpoint" {
   location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
 
+  enable_delegation = false
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet_private_endpoint
   route_table_id       = module.route_table.route_table_id
