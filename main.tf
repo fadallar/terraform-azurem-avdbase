@@ -88,7 +88,8 @@ module "vnet" {
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
   virtual_network_address_space = local.virtual_network_address_space
-  virtual_network_flow_timeout_in_minutes = 4git p
+  virtual_network_flow_timeout_in_minutes = 4
+  
 
 }
 
