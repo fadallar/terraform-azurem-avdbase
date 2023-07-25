@@ -91,8 +91,8 @@ module "vnet" {
 module "route_table" {
   source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-routetable//module?ref=release/1.0.0"
 
-  location            = module.regions_master.location
-  location_short      = module.regions_master.location_short
+  location            = module.regions.location
+  location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
   default_tags        = module.base_tagging.tags
   landing_zone_slug   = var.landing_zone_slug
