@@ -95,8 +95,8 @@ module "route_table" {
   location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
   default_tags        = module.base_tagging.tags
-  landing_zone_slug   = var.landing_zone_slug
-  stack               = var.stack
+  landing_zone_slug   = local.landing_zone_slug
+  stack               = local.stack
 
 }
 
