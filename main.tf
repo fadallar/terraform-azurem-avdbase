@@ -29,6 +29,9 @@ locals {
 
 }
 
+data "azurerm_client_config" "current" {
+}
+
 ####   Base Resources
 
 module "regions" {
