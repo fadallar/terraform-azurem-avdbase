@@ -120,6 +120,7 @@ module "subnet" {
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet
   route_table_id       = module.route_table.route_table_id
+  enable_delegation    = false
   //network_security_group_id               = 
 }
 
@@ -134,6 +135,8 @@ module "subnet-private-endpoint" {
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet_private_endpoint
   route_table_id       = module.route_table.route_table_id
+  enable_delegation    = false
+
   //network_security_group_id               = 
 }
 
