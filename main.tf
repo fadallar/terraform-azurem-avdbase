@@ -27,6 +27,10 @@ locals {
   file_share_quota       = 50
   file_share_access_tier = "TransactionOptimized"
 
+  ### Virtual Machine
+
+  vm_hostname = "testvm"
+
 }
 
 data "azurerm_client_config" "current" {
@@ -89,7 +93,7 @@ module "vnet" {
 
   virtual_network_address_space = local.virtual_network_address_space
   virtual_network_flow_timeout_in_minutes = 4
-  
+
 
 }
 
@@ -219,6 +223,7 @@ module "vmwindows" {
 
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
+  hostname            = local.vm_hostname
   subnet_id = module.subnet.subnet_id
 
   //network_security_group_id        = ""
