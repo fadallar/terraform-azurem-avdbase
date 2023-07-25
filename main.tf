@@ -123,7 +123,7 @@ module "subnet-private-endpoint" {
   resource_group_name = module.resource_group.resource_group_name
 
   virtual_network_name = module.vnet.virtual_network_name
-  address_prefixes     = local.subnet-private-endpoint
+  address_prefixes     = local.subnet_private_endpoint
   route_table_id       = module.route_table.route_table_id
   //network_security_group_id               = 
 }
