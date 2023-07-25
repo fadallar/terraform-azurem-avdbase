@@ -110,7 +110,7 @@ module "route_table" {
 }
 
 module "subnet" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=master"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=develop"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
@@ -124,7 +124,7 @@ module "subnet" {
 }
 
 module "subnet-private-endpoint" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=master"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-subnet//module?ref=develop"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
