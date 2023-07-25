@@ -37,7 +37,7 @@ module "regions" {
 }
 
 module "base_tagging" {
-  source          = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-basetagging//module?ref=release/1.0.0"
+  source          = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-basetagging//module?ref=1.1.0"
   environment     = local.environment
   application     = local.application
   cost_center     = local.cost_center
