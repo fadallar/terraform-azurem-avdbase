@@ -146,7 +146,7 @@ module "keyvault" {
   tenant_id = data.azurerm_client_config.current.tenant_id
 
   //private_dns_zone_id        = data.azurerm_private_dns_zone.privatelink-vaultcore-azure-net.id
-  private_endpoint_subnet_id = module.subnet_private_endpoint.subnet_id
+  private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
 
   network_acls = {
     bypass                     = "AzureServices"
