@@ -204,12 +204,14 @@ module "file_share" {
 module "vmwindows" {
   source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-vmwindows//module?ref=release/1.0.0"
 
-  landing_zone_slug               = local.landing_zone_slug
-  stack                           = local.stack
-  location                        = module.regions.location
-  location_short                  = module.regions.location_short
-  resource_group_name             = module.resource_group.resource_group_name
-  default_tags                    = module.base_tagging.base_tags
+  landing_zone_slug   = local.landing_zone_slug
+  stack               = local.stack
+  location            = module.regions.location
+  location_short      = module.regions.location_short
+  resource_group_name = module.resource_group.resource_group_name
+  default_tags        = module.base_tagging.base_tags
+  environment         = local.environment
+
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
   subnet_id = module.subnet.subnet_id
