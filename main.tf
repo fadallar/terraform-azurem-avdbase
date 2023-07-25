@@ -141,7 +141,7 @@ module "subnet-private-endpoint" {
 }
 
 module "nsg" {
-  source              = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-nsg//module?ref=main"
+  source              = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-nsg//module?ref=release/1.0.0"
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
   location            = module.regions.location
