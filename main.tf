@@ -22,6 +22,9 @@ locals {
   subnet                        = ["10.0.1.0/24"]
   subnet_private_endpoint       = ["10.0.2.0/24"]
 
+  storage_account_domain_name = "privatelink.blob.core.windows.net"
+  keyvault_domain_name = "privatelink.vaultcore.azure.net"
+
   ### Supporting Services
 
   file_share_quota       = 50
@@ -97,6 +100,24 @@ module "vnet" {
 
 }
 
+module "private_dns_zone_st_account" {
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-terraform-azurerm-privatednszone//module?ref=release/1.0.0"
+
+  domain_name         = local.storage_account_domain_name
+  resource_group_name = module.resource_group.resource_group_name
+  default_tags = module.base_tagging.base_tags
+  
+}
+
+module "private_dns_zone_keyvault" {
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-terraform-azurerm-privatednszone//module?ref=release/1.0.0"
+
+  domain_name         = local.keyvault_domain_name
+  resource_group_name = module.resource_group.resource_group_name
+  default_tags = module.base_tagging.base_tags
+  
+}
+
 module "route_table" {
   source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-routetable//module?ref=release/1.0.0"
 
@@ -119,7 +140,7 @@ module "subnet" {
 
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet
-  route_table_id       = module.route_table.route_table_id
+  //route_table_id       = module.route_table.route_table_id
   enable_delegation    = false
   //network_security_group_id               = 
 }
@@ -134,7 +155,7 @@ module "subnet-private-endpoint" {
 
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet_private_endpoint
-  route_table_id       = module.route_table.route_table_id
+  //route_table_id       = module.route_table.route_table_id
   enable_delegation    = false
 
   //network_security_group_id               = 
@@ -167,7 +188,7 @@ module "keyvault" {
 
   tenant_id = data.azurerm_client_config.current.tenant_id
 
-  //private_dns_zone_id        = data.azurerm_private_dns_zone.privatelink-vaultcore-azure-net.id
+  private_dns_zone_id        = module.private_dns_zone_keyvault.id
   private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
 
   network_acls = {
@@ -190,7 +211,7 @@ module "storage_account" {
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
 
-  //private_dns_zone_id = data.azurerm_private_dns_zone.privatelink-vaultcore-azure-net.id
+  private_dns_zone_id = module.private_dns_zone_keyvault.id
   private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
 
   storage_blob_data_protection = {
