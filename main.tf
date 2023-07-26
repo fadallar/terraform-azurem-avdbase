@@ -101,7 +101,7 @@ module "vnet" {
 }
 
 module "private_dns_zone_st_account" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-terraform-azurerm-privatednszone//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-privatednszone//module?ref=release/1.0.0"
 
   domain_name         = local.storage_account_domain_name
   resource_group_name = module.resource_group.resource_group_name
@@ -110,7 +110,7 @@ module "private_dns_zone_st_account" {
 }
 
 module "private_dns_zone_keyvault" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-terraform-azurerm-privatednszone//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-privatednszone//module?ref=release/1.0.0"
 
   domain_name         = local.keyvault_domain_name
   resource_group_name = module.resource_group.resource_group_name
