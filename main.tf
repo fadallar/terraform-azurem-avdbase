@@ -258,7 +258,6 @@ module "vmwindows" {
   location_short      = module.regions.location_short
   resource_group_name = module.resource_group.resource_group_name
   default_tags        = module.base_tagging.base_tags
-  environment         = local.environment
 
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
