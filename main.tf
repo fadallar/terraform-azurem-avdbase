@@ -71,7 +71,7 @@ module "resource_group" {
 }
 
 module "diag_log_analytics_workspace" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-loganalyticsworkspace//module?ref=master"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-loganalyticsworkspace//module?ref=feature/use-tf-lock-file"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
