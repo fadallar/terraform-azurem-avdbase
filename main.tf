@@ -27,8 +27,8 @@ locals {
 
   ### Supporting Services
 
-  file_share_quota       = 50
-  file_share_access_tier = "TransactionOptimized"
+  file_share_quota            = 50
+  file_share_access_tier      = "TransactionOptimized"
   file_share_enabled_protocol = "SMB"
 
   ### Virtual Machine
@@ -215,6 +215,8 @@ module "storage_account" {
   account_replication_type = "LRS"
   account_kind             = "FileStorage"
 
+  large_file_share_enabled = "true"
+
   private_dns_zone_id        = module.private_dns_zone_keyvault.id
   private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
 
@@ -261,8 +263,9 @@ module "vmwindows" {
 
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
-  hostname  = local.vm_hostname
-  subnet_id = module.subnet.subnet_id
+  hostname    = local.vm_hostname
+  custom_name = local.vm_hostname
+  subnet_id   = module.subnet.subnet_id
 
   network_security_group_id = module.nsg.nsg_id
 
