@@ -222,6 +222,13 @@ module "storage_account" {
   private_dns_zone_id           = module.private_dns_zone_keyvault.id
   private_endpoint_subnet_id    = module.subnet-private-endpoint.subnet_id
 
+  network_acls = {
+    bypass                     = ["Logging", "Metrics", "AzureServices"]
+    default_action             = "Allow",
+    ip_rules                   = [],
+    virtual_network_subnet_ids = []
+  }
+
   storage_blob_data_protection = {
     "change_feed_enabled" : false,
     "container_delete_retention_policy_in_days" : 7,
