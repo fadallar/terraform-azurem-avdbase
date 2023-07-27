@@ -23,7 +23,7 @@ locals {
   subnet_private_endpoint       = ["10.0.2.0/24"]
 
   storage_account_domain_name = "privatelink.blob.core.windows.net"
-  keyvault_domain_name = "privatelink.vaultcore.azure.net"
+  keyvault_domain_name        = "privatelink.vaultcore.azure.net"
 
   ### Supporting Services
 
@@ -105,8 +105,8 @@ module "private_dns_zone_st_account" {
 
   domain_name         = local.storage_account_domain_name
   resource_group_name = module.resource_group.resource_group_name
-  default_tags = module.base_tagging.base_tags
-  
+  default_tags        = module.base_tagging.base_tags
+
 }
 
 module "private_dns_zone_keyvault" {
@@ -114,8 +114,8 @@ module "private_dns_zone_keyvault" {
 
   domain_name         = local.keyvault_domain_name
   resource_group_name = module.resource_group.resource_group_name
-  default_tags = module.base_tagging.base_tags
-  
+  default_tags        = module.base_tagging.base_tags
+
 }
 
 module "route_table" {
@@ -141,7 +141,7 @@ module "subnet" {
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet
   //route_table_id       = module.route_table.route_table_id
-  enable_delegation    = false
+  enable_delegation = false
   //network_security_group_id               = 
 }
 
@@ -156,7 +156,7 @@ module "subnet-private-endpoint" {
   virtual_network_name = module.vnet.virtual_network_name
   address_prefixes     = local.subnet_private_endpoint
   //route_table_id       = module.route_table.route_table_id
-  enable_delegation    = false
+  enable_delegation = false
 
   //network_security_group_id               = 
 }
@@ -210,8 +210,11 @@ module "storage_account" {
   default_tags                    = module.base_tagging.base_tags
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
+  account_tier             = "Premium"
+  account_replication_type = "LRS"
+  account_kind             = "FileStorage"
 
-  private_dns_zone_id = module.private_dns_zone_keyvault.id
+  private_dns_zone_id        = module.private_dns_zone_keyvault.id
   private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
 
   storage_blob_data_protection = {
@@ -232,11 +235,12 @@ module "file_share" {
   landing_zone_slug = local.landing_zone_slug
   stack             = local.stack
   location_short    = module.regions.location_short
+  workload_info     = "fslogix"
 
   storage_account_name = module.storage_account.storage_account_name
   quota                = local.file_share_quota
   access_tier          = local.file_share_access_tier
-
+  enabled_protocol     = "SMB"
 
 }
 
