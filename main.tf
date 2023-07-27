@@ -217,8 +217,10 @@ module "storage_account" {
 
   large_file_share_enabled = "true"
 
-  private_dns_zone_id        = module.private_dns_zone_keyvault.id
-  private_endpoint_subnet_id = module.subnet-private-endpoint.subnet_id
+  public_network_access_enabled = true
+  enable_private_endpoint       = false
+  private_dns_zone_id           = module.private_dns_zone_keyvault.id
+  private_endpoint_subnet_id    = module.subnet-private-endpoint.subnet_id
 
   storage_blob_data_protection = {
     "change_feed_enabled" : false,
