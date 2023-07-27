@@ -27,7 +27,7 @@ locals {
 
   ### Supporting Services
 
-  file_share_quota            = 50
+  file_share_quota            = 100
   file_share_access_tier      =  "Premium"//"TransactionOptimized"
   file_share_enabled_protocol = "SMB"
 
