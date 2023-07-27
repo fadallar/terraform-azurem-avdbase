@@ -252,7 +252,7 @@ module "file_share" {
   storage_account_name = module.storage_account.storage_account_name
   quota                = local.file_share_quota
   access_tier          = local.file_share_access_tier
-  enabled_protocol     = local.file_share_enabled_protocol
+  //enabled_protocol     = local.file_share_enabled_protocol
 
 }
 
