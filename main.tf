@@ -28,7 +28,7 @@ locals {
   ### Supporting Services
 
   file_share_quota            = 50
-  file_share_access_tier      = "TransactionOptimized"
+  file_share_access_tier      =  "Premium"//"TransactionOptimized"
   file_share_enabled_protocol = "SMB"
 
   ### Virtual Machine
@@ -213,7 +213,7 @@ module "storage_account" {
 
   account_tier             = "Premium"
   account_replication_type = "LRS"
-  //account_kind             = "FileStorage"
+  account_kind             = "FileStorage"
 
   large_file_share_enabled = "true"
 
