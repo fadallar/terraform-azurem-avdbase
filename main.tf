@@ -29,6 +29,7 @@ locals {
 
   file_share_quota       = 50
   file_share_access_tier = "TransactionOptimized"
+  file_share_enabled_protocol = "SMB"
 
   ### Virtual Machine
 
@@ -176,7 +177,7 @@ module "nsg" {
 
 
 module "keyvault" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-keyvault//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-keyvault//module?ref=release/1.1.0"
 
   landing_zone_slug               = local.landing_zone_slug
   stack                           = local.stack
@@ -200,7 +201,7 @@ module "keyvault" {
 }
 
 module "storage_account" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-blobstorage//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-blobstorage//module?ref=release/1.1.0"
 
   landing_zone_slug               = local.landing_zone_slug
   stack                           = local.stack
@@ -240,7 +241,7 @@ module "file_share" {
   storage_account_name = module.storage_account.storage_account_name
   quota                = local.file_share_quota
   access_tier          = local.file_share_access_tier
-  enabled_protocol     = "SMB"
+  enabled_protocol     = local.file_share_enabled_protocol
 
 }
 
@@ -249,7 +250,7 @@ module "file_share" {
 
 
 module "vmwindows" {
-  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-vmwindows//module?ref=release/1.0.0"
+  source = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-vmwindows//module?ref=release/1.1.0"
 
   landing_zone_slug   = local.landing_zone_slug
   stack               = local.stack
