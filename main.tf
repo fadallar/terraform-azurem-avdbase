@@ -211,7 +211,7 @@ module "storage_account" {
   default_tags                    = module.base_tagging.base_tags
   diag_log_analytics_workspace_id = module.diag_log_analytics_workspace.log_analytics_workspace_id
 
-  //account_tier             = "Premium"
+  account_tier             = "Premium"
   account_replication_type = "LRS"
   //account_kind             = "FileStorage"
 
